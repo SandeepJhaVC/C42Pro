@@ -1,6 +1,6 @@
-var hr = hour();
-var mn = minute();
-var sc = second();
+var hr;
+var mn;
+var sc;
 
 function setup() {
   createCanvas(800,400);
@@ -13,18 +13,51 @@ function setup() {
 function draw() {
   background(255,255,255);
 
+  hr = hour();
+  mn = minute();
+  sc = second();
+
   scAngle = map(sc, 0, 60, 0, 360);
-  mnAngle = map(mn, 0, 60, 0, 360%12);
-  hrAngle = map(hr, 0, 60, 0, 360);
+  mnAngle = map(mn, 0, 60, 0, 360);
+  hrAngle = map(hr % 12, 0, 12, 0, 360);
 
-  stroke('red');
-  strokeWeight(5);
-  arc(800, 200, 250, 250, 10, PI);
+  translate(200,200);
 
-  translate(0,0);
-  stroke(255,0,0);
+  push();
+  rotate(scAngle);
+  stroke("blue");
   strokeWeight(7);
   line(0,0,100,0);
+  pop();
+
+  push();
+  stroke("blue");
+  arc(0, 0, 300, 300, 0, scAngle);
+  pop();
+
+  push();
+  rotate(mnAngle);
+  stroke("green");
+  strokeWeight(7);
+  line(0,0,100,0);
+  pop();
+
+  push();
+  stroke("green");
+  arc(0, 0, 300, 300, 0, mnAngle);
+  pop();
+
+  push();
+  rotate(hrAngle);
+  stroke("red");
+  strokeWeight(7);
+  line(0,0,100,0);
+  pop();
+
+  push();
+  stroke("red");
+  arc(0, 0, 300, 300, 0, hrAngle);
+  pop();
 
   drawSprites();
 }
